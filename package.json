@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "seed": "npx tsx ./lib/db/seed.ts",
+    "email": "email dev",
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
@@ -41,13 +42,24 @@
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
+    "@paypal/react-paypal-js": "^8.7.0",
+    "@react-email/components": "^0.0.32",
     "@types/bcryptjs": "^2.4.6",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "add": "^2.0.6",
+    "badge": "^1.0.3",
     "eslint": "^9",
     "eslint-config-next": "15.1.4",
+    "i": "^0.3.7",
+    "npm": "^11.0.0",
+    "npx": "^10.2.2",
     "postcss": "^8",
+    "react-email": "^3.0.6",
+    "resend": "^4.0.1",
+    "shadcn": "^2.1.8",
+    "table": "^6.9.0",
     "tailwindcss": "^3.4.1",
     "typescript": "^5"
   }
