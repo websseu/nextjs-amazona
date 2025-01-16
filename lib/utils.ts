@@ -24,17 +24,13 @@ export function formUrlQuery({
     { skipNull: true }
   )
 }
-
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
 }
-
 export const formatNumberWithDecimal = (num: number): string => {
   const [int, decimal] = num.toString().split('.')
   return decimal ? `${int}.${decimal.padEnd(2, '0')}` : int
 }
-// PROMPT: [ChatGTP] create toSlug ts arrow function that convert text to lowercase, remove non-word, non-whitespace, non-hyphen characters, replace whitespace, trim leading hyphens and trim trailing hyphens
-
 export const toSlug = (text: string): string =>
   text
     .toLowerCase()
@@ -51,19 +47,16 @@ const CURRENCY_FORMATTER = new Intl.NumberFormat('en-US', {
 export function formatCurrency(amount: number) {
   return CURRENCY_FORMATTER.format(amount)
 }
-
 const NUMBER_FORMATTER = new Intl.NumberFormat('en-US')
 export function formatNumber(number: number) {
   return NUMBER_FORMATTER.format(number)
 }
-
 export const round2 = (num: number) =>
   Math.round((num + Number.EPSILON) * 100) / 100
 
 export const generateId = () =>
   Array.from({ length: 24 }, () => Math.floor(Math.random() * 10)).join('')
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const formatError = (error: any): string => {
   if (error.name === 'ZodError') {
     const fieldErrors = Object.keys(error.errors).map((field) => {
@@ -87,7 +80,6 @@ export const formatError = (error: any): string => {
       : JSON.stringify(error.message)
   }
 }
-
 export function calculateFutureDate(days: number) {
   const currentDate = new Date()
   currentDate.setDate(currentDate.getDate() + days)
@@ -118,7 +110,6 @@ export function timeUntilMidnight(): { hours: number; minutes: number } {
 
   return { hours, minutes }
 }
-
 export const formatDateTime = (dateString: Date) => {
   const dateTimeOptions: Intl.DateTimeFormatOptions = {
     month: 'short', // abbreviated month name (e.g., 'Oct')
@@ -157,7 +148,41 @@ export const formatDateTime = (dateString: Date) => {
     timeOnly: formattedTime,
   }
 }
-
 export function formatId(id: string) {
   return `..${id.substring(id.length - 6)}`
+}
+
+export const getFilterUrl = ({
+  params,
+  category,
+  tag,
+  sort,
+  price,
+  rating,
+  page,
+}: {
+  params: {
+    q?: string
+    category?: string
+    tag?: string
+    price?: string
+    rating?: string
+    sort?: string
+    page?: string
+  }
+  tag?: string
+  category?: string
+  sort?: string
+  price?: string
+  rating?: string
+  page?: string
+}) => {
+  const newParams = { ...params }
+  if (category) newParams.category = category
+  if (tag) newParams.tag = toSlug(tag)
+  if (price) newParams.price = price
+  if (rating) newParams.rating = rating
+  if (page) newParams.page = page
+  if (sort) newParams.sort = sort
+  return `/search?${new URLSearchParams(newParams).toString()}`
 }
